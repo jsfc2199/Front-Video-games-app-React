@@ -43,24 +43,20 @@ const Videogame = () => {
     }
   }
 
-
-
   //update games
 
 
 
   //filter gamesconst [search,setSearch] = useState('') 
-    const [searchTerm,setSearch] = useState('') 
+  const [searchTerm, setSearch] = useState('')
 
-    const onSearch = (e)=>{
-        setSearch(e.target.value)
-    }
-
-
+  const onSearch = (e) => {
+    setSearch(e.target.value)
+  }
 
   return (
     <div>
-    <input className = 'filtergames' type='text' placeholder='Filter video games' value={searchTerm} onChange={onSearch}/>
+      <input className='filtergames' type='text' placeholder='Filter video games' value={searchTerm} onChange={onSearch} />
       <table className="justTable">
         <thead>
           <tr className="justTableHead">
@@ -75,10 +71,10 @@ const Videogame = () => {
         </thead>
 
         {
-          state.listOfGames.filter((gameSearched)=>{
-            if(searchTerm == ""){
+          state.listOfGames.filter((gameSearched) => {
+            if (searchTerm == "") {
               return gameSearched
-            }else if(gameSearched.name.toLowerCase().includes(searchTerm.toLowerCase())){
+            } else if (gameSearched.name.toLowerCase().includes(searchTerm.toLowerCase())) {
               return gameSearched
             }
           }).map(game => {

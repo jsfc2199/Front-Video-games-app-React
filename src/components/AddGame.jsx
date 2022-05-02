@@ -7,9 +7,6 @@ const AddGame = () => {
     const [mainLanguaje, setLanguaje] = useState('')
     const [webToDownload, setWebsite] = useState('')
 
-
-
-
     const addGame = (e) => {
         setName(e.target.value)
     }
