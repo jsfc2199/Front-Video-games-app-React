@@ -75,7 +75,7 @@ const AddGame = () => {
                 <input onChange={addWebsite} type='text' placeholder='URL' />
             </div>
 
-            <input type='submit' value='Save task' className='btn-save'/>
+            <input type='submit' value='Save video game' className='btn-save'/>
         </form>
     )
 }

@@ -1,11 +1,13 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Store } from './StoreProvider'
-import { FaTimes} from 'react-icons/fa'
+import { FaTimes } from 'react-icons/fa'
+
 
 const Videogame = () => {
 
   const { state, dispatch } = useContext(Store)
 
+  //get games
   useEffect(() => {
     let listOfGames = fetchAllGames().then(
       (games) => {
@@ -25,16 +27,14 @@ const Videogame = () => {
     return data
   }
 
-
+  //delete games
   const onDelete = async (game) => {
 
-    let response = await fetch(`http://localhost:8081/api/delete/game/${game.id}`, //we have the id from the note
+    let response = await fetch(`http://localhost:8081/api/delete/game/${game.id}`,
       {
-        method: 'DELETE'//we don't send info because we are deleting
+        method: 'DELETE'
       })
 
-    //if the status is ok we send the action to delete
-    //we do this because we don't want to affect the global state        
     if (response.status === 200) {
       dispatch({
         type: 'remove-game',
@@ -45,12 +45,26 @@ const Videogame = () => {
 
 
 
+  //update games
+
+
+
+  //filter gamesconst [search,setSearch] = useState('') 
+    const [searchTerm,setSearch] = useState('') 
+
+    const onSearch = (e)=>{
+        setSearch(e.target.value)
+    }
+
+
+
   return (
     <div>
+    <input className = 'filtergames' type='text' placeholder='Filter video games' value={searchTerm} onChange={onSearch}/>
       <table className="justTable">
         <thead>
           <tr className="justTableHead">
-            
+
             <th>Videogame's Name</th>
             <th>Principal Languaje</th>
             <th>Web to download</th>
@@ -61,16 +75,21 @@ const Videogame = () => {
         </thead>
 
         {
-          state.listOfGames.map(game => {
+          state.listOfGames.filter((gameSearched)=>{
+            if(searchTerm == ""){
+              return gameSearched
+            }else if(gameSearched.name.toLowerCase().includes(searchTerm.toLowerCase())){
+              return gameSearched
+            }
+          }).map(game => {
             return <tbody className="justBody" >
               <tr>
-                
                 <td>{game.name}</td>
                 <td>{game.mainLanguaje}</td>
                 <td> {game.webToDownload}</td>
                 <td className="inputStyler"><input type="checkbox" /></td>
                 <td className="inputStyler"><input type="checkbox" /></td>
-                <td className="inputStyler"> <FaTimes style={{color: 'red' , cursor: 'pointer'}} onClick={()=>onDelete(game)}/></td>
+                <td className="inputStyler"> <FaTimes style={{ color: 'red', cursor: 'pointer' }} onClick={() => onDelete(game)} /></td>
               </tr>
             </tbody>
           })

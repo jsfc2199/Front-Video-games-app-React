@@ -15,7 +15,6 @@ function App() {
       <div className="displayContainer">
         <Header />
         <AddGame />
-        <Searchbar />
         <Videogame  />
       </div>
     </StoreProvider>
