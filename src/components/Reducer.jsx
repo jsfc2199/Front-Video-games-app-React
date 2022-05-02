@@ -6,11 +6,22 @@ function reducer(state, action) {
                 listOfGames: action.payload
             }
             return stateWithAllGames
-        case 'add-note':
-            return state
-        case 'remove-note':
-            return state
-        case 'update-note':
+            
+        case 'add-game':
+            const newGame = action.payload
+            const listStateWithNewGame=[...state.listOfGames, newGame]
+            const stateWithNewGameAdded={
+                ...state, listOfGames: listStateWithNewGame
+            }
+            return stateWithNewGameAdded
+
+        case 'remove-game':
+            const newlistOfNotesWithOutPayloadGame =
+                state.listOfGames.filter(game => game.id !== action.payload.id)
+            const newStateWithoutNoteDeleted = { ...state, listOfGames: newlistOfNotesWithOutPayloadGame }
+            return newStateWithoutNoteDeleted
+
+        case 'update-game':
             return state
     }
 }

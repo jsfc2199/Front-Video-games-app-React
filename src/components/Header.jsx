@@ -5,7 +5,6 @@ const Header = () => {
   return (
     <header className="header">
       <h1>Video Games Controll</h1>
-      <Button text = 'Add'/>
     </header>
   )
 }

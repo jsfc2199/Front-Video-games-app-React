@@ -5,15 +5,18 @@ import AddGame from './components/AddGame'
 import StoreProvider from './components/StoreProvider'
 import Searchbar from './components/Searchbar'
 
+
 function App() {
+ 
+
 
   return (
     <StoreProvider >
       <div className="displayContainer">
-      <Header />
-      <AddGame />
-      <Searchbar />
-      <Videogame />
+        <Header />
+        <AddGame />
+        <Searchbar />
+        <Videogame  />
       </div>
     </StoreProvider>
   )
