@@ -44,6 +44,48 @@ const Videogame = () => {
   }
 
   //update games
+  
+  const onCheckBoxLanguaje = async (event, game) => {
+    const checked = event.currentTarget.checked;
+
+    let gameWithCheckboxInformation = {...game,subSpanish: checked} 
+
+    let gameUpdatedPromise = await fetch(`http://localhost:8081/api/update/game`,
+    {method: 'PUT',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(gameWithCheckboxInformation) //send the body the game with the info check
+        })
+
+        let gameUpdated = await gameUpdatedPromise.json()//making the game into a json structure
+
+    dispatch({
+        type: 'update-game',
+        payload: gameUpdated  
+    })
+  }
+
+  const onCheckBox = async (event, game) => {
+    const checked = event.currentTarget.checked;
+
+    let gameWithCheckboxInformation = {...game,finished: checked} 
+
+    let gameUpdatedPromise = await fetch(`http://localhost:8081/api/update/game`,
+    {method: 'PUT',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(gameWithCheckboxInformation) //send the body the game with the info check
+        })
+
+        let gameUpdated = await gameUpdatedPromise.json()//making the game into a json structure
+
+    dispatch({
+        type: 'update-game',
+        payload: gameUpdated  
+    })
+}
 
 
 
@@ -83,8 +125,8 @@ const Videogame = () => {
                 <td>{game.name}</td>
                 <td>{game.mainLanguaje}</td>
                 <td> {game.webToDownload}</td>
-                <td className="inputStyler"><input type="checkbox" /></td>
-                <td className="inputStyler"><input type="checkbox" /></td>
+                <td className="inputStyler"><input type="checkbox" onChange={(event)=> onCheckBoxLanguaje(event,game)} checked={game.subSpanish}/></td>
+                <td className="inputStyler"><input type="checkbox" onChange={(event)=> onCheckBox(event,game)} checked={game.finished}/></td>
                 <td className="inputStyler"> <FaTimes style={{ color: 'red', cursor: 'pointer' }} onClick={() => onDelete(game)} /></td>
               </tr>
             </tbody>

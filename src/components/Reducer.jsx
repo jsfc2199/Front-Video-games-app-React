@@ -22,7 +22,18 @@ function reducer(state, action) {
             return newStateWithoutNoteDeleted
 
         case 'update-game':
-            return state
+            const newlistOfGames = state.listOfGames.map(game => {
+                if (game.id == action.payload.id) {
+
+                    return action.payload
+                }
+                return game
+            })       
+
+            const newStateModifiedCheckBox = {
+                ...state, listOfGames: newlistOfGames
+            }
+            return newStateModifiedCheckBox
     }
 }
 

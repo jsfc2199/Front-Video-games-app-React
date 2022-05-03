@@ -28,7 +28,7 @@ const AddGame = () => {
                 mainLanguaje,
                 webToDownload,
                 subSpanish: false,
-                isFinished: false,
+                finished: false,
             }
 
             let gameInPromise = await fetch(`http://localhost:8081/api/save/game`,
@@ -48,6 +48,8 @@ const AddGame = () => {
                 payload: gameToSave
             })
             form.reset()
+        }else{
+            alert('Please fill the three fields')
         }
         
     }
